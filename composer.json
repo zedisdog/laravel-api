@@ -1,0 +1,16 @@
+{
+    "name": "cao-jiayuan/laravel-api",
+    "description": "A simple starter kit for Laravel to build api",
+    "type": "library",
+    "require": {
+        "dingo/api": "1.0.*@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "cjy632258",
+            "email": "cjy632258@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
