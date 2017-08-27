@@ -3,7 +3,8 @@
     "description": "A simple starter kit for Laravel to build api",
     "type": "library",
     "require": {
-        "dingo/api": "1.0.*@dev"
+        "barryvdh/laravel-ide-helper": "^2.4",
+        "doctrine/dbal": "^2.6"
     },
     "license": "MIT",
     "authors": [
@@ -12,5 +13,11 @@
             "email": "cjy632258@hotmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "autoload": {
+        "psr-4": {
+            "CaoJiayuan\\LaravelApi\\": "src/CaoJiayuan/LaravelApi/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
