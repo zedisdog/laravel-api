@@ -4,8 +4,7 @@
     "type": "library",
     "require": {
         "barryvdh/laravel-ide-helper": "^2.4",
-        "doctrine/dbal": "^2.6",
-        "cao-jiayuan/evonne": "dev-master"
+        "doctrine/dbal": "^2.6"
     },
     "license": "MIT",
     "authors": [
