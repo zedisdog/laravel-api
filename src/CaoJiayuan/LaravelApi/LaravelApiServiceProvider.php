@@ -11,6 +11,7 @@ namespace CaoJiayuan\LaravelApi;
 
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Mnabialek\LaravelSqlLogger\Providers\ServiceProvider as SqlLoggerServiceProvider;
 
 class LaravelApiServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,7 @@ class LaravelApiServiceProvider extends ServiceProvider
 
     public function publish()
     {
-        $resources = __DIR__ . '/resources';
+        $resources = __DIR__ . '/../../resources';
 
         $publishPath = resource_path();
 
@@ -34,5 +35,6 @@ class LaravelApiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(IdeHelperServiceProvider::class);
+        $this->app->register(SqlLoggerServiceProvider::class);
     }
 }

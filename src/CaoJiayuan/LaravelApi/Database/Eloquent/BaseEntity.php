@@ -6,7 +6,7 @@
  * Time: 20:11
  */
 
-namespace CaoJiayuan\LaravelApi\Database;
+namespace CaoJiayuan\LaravelApi\Database\Eloquent;
 
 
 use Illuminate\Database\Eloquent\Model;

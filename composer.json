@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "barryvdh/laravel-ide-helper": "^2.4",
-        "doctrine/dbal": "^2.6"
+        "doctrine/dbal": "^2.6",
+        "mnabialek/laravel-sql-logger": "^1.1"
     },
     "license": "MIT",
     "authors": [
@@ -16,7 +17,10 @@
     "autoload": {
         "psr-4": {
             "CaoJiayuan\\LaravelApi\\": "src/CaoJiayuan/LaravelApi/"
-        }
+        },
+        "files" : [
+            "src/CaoJiayuan/LaravelApi/helpers.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
