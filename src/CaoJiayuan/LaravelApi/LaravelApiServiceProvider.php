@@ -12,9 +12,12 @@ namespace CaoJiayuan\LaravelApi;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Mnabialek\LaravelSqlLogger\Providers\ServiceProvider as SqlLoggerServiceProvider;
+use Tymon\JWTAuth\Providers\JWTAuthServiceProvider;
 
 class LaravelApiServiceProvider extends ServiceProvider
 {
+
+    protected $configs = ['laravel-api'];
 
     public function boot()
     {
@@ -25,16 +28,39 @@ class LaravelApiServiceProvider extends ServiceProvider
     {
         $resources = __DIR__ . '/../../resources';
 
-        $publishPath = resource_path();
+        $resourcePath = resource_path();
+
+        $configs = __DIR__ . '/../../config';
+
+        $configPath = config_path();
 
         $this->publishes([
-            $resources => $publishPath
-        ], 'resources');
+            $resources => $resourcePath,
+            $configs => $configPath
+        ]);
     }
 
     public function register()
     {
+        $this->mergeConfig();
         $this->app->register(IdeHelperServiceProvider::class);
         $this->app->register(SqlLoggerServiceProvider::class);
+        $this->app->register(JWTAuthServiceProvider::class);
+
+    }
+
+    public function mergeConfig()
+    {
+        /** @var \Illuminate\Config\Repository $config */
+        $config = $this->app['config'];
+        /** @var \Illuminate\Filesystem\Filesystem $file */
+        $file = $this->app['files'];
+
+        foreach ($this->configs as $key) {
+            if (!$config->has($key)) {
+                $value = $file->getRequire(__DIR__.'/../../config/'. $key. '.php');
+                $config->set($key, $value);
+            }
+        }
     }
 }

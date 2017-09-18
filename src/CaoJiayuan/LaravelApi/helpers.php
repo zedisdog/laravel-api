@@ -58,7 +58,7 @@ if (!function_exists('file_map')) {
                 /** @var SplFileInfo $item */
                 foreach ($items as $item) {
                     if ($item->isDir() && !$item->isLink() && $recursive) {
-                        $closure($item->getPathname(), $item, $item->isDir());
+                        $closure($item->getPathname(), $item, true);
                         file_map($item->getPathname(), $closure);
                     } else {
                         $closure($item->getPathname(), $item, $item->isDir());
@@ -66,7 +66,7 @@ if (!function_exists('file_map')) {
                 }
             } else {
                 $f = new SplFileInfo($fe);
-                $closure($fe, $f);
+                $closure($fe, $f, false);
             }
         }
     }

@@ -5,7 +5,8 @@
     "require": {
         "barryvdh/laravel-ide-helper": "^2.4",
         "doctrine/dbal": "^2.6",
-        "mnabialek/laravel-sql-logger": "^1.1"
+        "mnabialek/laravel-sql-logger": "^1.1",
+        "tymon/jwt-auth": "^0.5.12"
     },
     "license": "MIT",
     "authors": [
