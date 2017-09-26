@@ -9,9 +9,29 @@
 namespace CaoJiayuan\LaravelApi\Database\Eloquent;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseEntity extends Model
 {
 
+    /**
+     * @return Builder
+     */
+    public function newQuery()
+    {
+        $builder = parent::newQuery();
+
+        $this->beforeQuery($builder);
+
+        return $builder;
+    }
+
+    /**
+     * @param Builder $builder
+     */
+    public function beforeQuery($builder)
+    {
+
+    }
 }
