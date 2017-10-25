@@ -41,6 +41,20 @@ class Auth extends Authenticate
     {
         $id = $payload->get('sub');
 
+        $user = $this->getUser($id, $payload);
+
+        return $user;
+    }
+
+
+    /**
+     * @param $id
+     * @param Payload $payload
+     * @return User
+     */
+    public function getUser($id, $payload)
+    {
+        return $this->auth->loginUsingId($id);
     }
 
     /**
