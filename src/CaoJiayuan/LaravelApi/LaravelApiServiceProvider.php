@@ -13,6 +13,7 @@ use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Mnabialek\LaravelSqlLogger\Providers\ServiceProvider as SqlLoggerServiceProvider;
 use Tymon\JWTAuth\Providers\JWTAuthServiceProvider;
+use Tymon\JWTAuth\Providers\LaravelServiceProvider;
 
 class LaravelApiServiceProvider extends ServiceProvider
 {
@@ -45,7 +46,7 @@ class LaravelApiServiceProvider extends ServiceProvider
         $this->mergeConfig();
         $this->app->register(IdeHelperServiceProvider::class);
         $this->app->register(SqlLoggerServiceProvider::class);
-        $this->app->register(JWTAuthServiceProvider::class);
+        $this->app->register(LaravelServiceProvider::class);
 
     }
 
