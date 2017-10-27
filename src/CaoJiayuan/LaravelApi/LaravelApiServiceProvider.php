@@ -12,7 +12,6 @@ namespace CaoJiayuan\LaravelApi;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Mnabialek\LaravelSqlLogger\Providers\ServiceProvider as SqlLoggerServiceProvider;
-use Tymon\JWTAuth\Providers\JWTAuthServiceProvider;
 use Tymon\JWTAuth\Providers\LaravelServiceProvider;
 
 class LaravelApiServiceProvider extends ServiceProvider
