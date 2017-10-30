@@ -31,5 +31,8 @@
                 "CaoJiayuan\\LaravelApi\\LaravelApiServiceProvider"
             ]
         }
+    },
+    "suggest": {
+        "guzzlehttp/guzzle": "Required to use the OAuth util."
     }
 }
