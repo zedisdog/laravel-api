@@ -73,7 +73,7 @@ trait ExceptionRenderer
 
             $class = array_get($item, 'class');
             $func = array_get($item, 'function');
-            $type = array_get($item, 'type',);
+            $type = array_get($item, 'type');
             $line = $line ? '(' . $line . ')' : '';
             $args = array_get($item, 'args', []);
 
