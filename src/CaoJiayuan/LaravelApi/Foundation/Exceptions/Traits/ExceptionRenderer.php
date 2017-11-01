@@ -39,7 +39,7 @@ trait ExceptionRenderer
                 $message = $errors->first();
             }
             $data = ['code' => $code, 'errors' => $errors, 'message' => $message];
-            if (config('app.debug') && $code == 500) {
+            if (config('app.debug') && $code >= 500) {
                 $file = $exception->getFile();
                 $file = str_replace(base_path() . DIRECTORY_SEPARATOR, '', $file);
                 $line = $exception->getLine();
