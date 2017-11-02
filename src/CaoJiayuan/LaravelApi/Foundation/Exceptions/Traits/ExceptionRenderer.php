@@ -13,6 +13,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+
 trait ExceptionRenderer
 {
 
@@ -43,7 +44,7 @@ trait ExceptionRenderer
                 $file = $exception->getFile();
                 $file = str_replace(base_path() . DIRECTORY_SEPARATOR, '', $file);
                 $line = $exception->getLine();
-                $data['file'] =  "$file. Line:[$line]";
+                $data['file'] = "$file. Line:[$line]";
                 $data['trace'] = $this->parseTrace($exception);
             }
 
@@ -66,15 +67,15 @@ trait ExceptionRenderer
         $trace = [];
 
         foreach ($t as $i => $item) {
-            $file = arr_get('file', $item, '[internal function]');
+            $file = array_get($item, 'file', '[internal function]');
             $file = str_replace(base_path() . DIRECTORY_SEPARATOR, '', $file);
-            $line = arr_get('line', $item);
+            $line = array_get($item, 'line');
 
-            $class = arr_get('class', $item);
-            $func = arr_get('function', $item);
-            $type = arr_get('type', $item);
+            $class = array_get($item, 'class');
+            $func = array_get($item, 'function');
+            $type = array_get($item, 'type');
             $line = $line ? '(' . $line . ')' : '';
-            $args = arr_get('args', $item, []);
+            $args = array_get($item, 'args', []);
 
             $ar = '';
             foreach ($args as $arg) {
@@ -96,7 +97,7 @@ trait ExceptionRenderer
 
             $ar = rtrim($ar, ', ');
 
-            $trace[] =  '[#' . $i .'] '. $file . $line . ': ' . $class . $type . $func . '(' . $ar . ')';
+            $trace[] = '[#' . $i . '] ' . $file . $line . ': ' . $class . $type . $func . '(' . $ar . ')';
         }
 
         return $trace;
