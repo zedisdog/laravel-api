@@ -8,10 +8,14 @@
 
 namespace CaoJiayuan\LaravelApi\Foundation\Exceptions\Traits;
 
+use CaoJiayuan\LaravelApi\Database\Eloquent\BaseEntity;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 trait ExceptionRenderer
@@ -31,6 +35,20 @@ trait ExceptionRenderer
         if ($exception instanceof HttpExceptionInterface) {
             $code = $exception->getStatusCode();
         }
+
+        $baseName = class_basename($exception);
+
+        $methodName = 'handle' . $baseName;
+        if (method_exists($this, $methodName)) {
+            $response = call_user_func_array([$this, $methodName], [$exception, $request]);
+            if ($response instanceof Response){
+                return $response;
+            }
+            if ($response instanceof Exception) {
+                $exception = $response;
+            }
+        }
+
         $message = $exception->getMessage();
         if ($request->expectsJson()) {
             $errors = [];
@@ -101,5 +119,32 @@ trait ExceptionRenderer
         }
 
         return $trace;
+    }
+
+    /**
+     * @param ModelNotFoundException $exception
+     * @param Request $request
+     * @return Exception|\Illuminate\Http\JsonResponse
+     */
+    public function handleModelNotFoundException(ModelNotFoundException $exception, $request)
+    {
+        $model = $exception->getModel();
+        $message = $exception->getMessage();
+
+        if (method_exists($model, 'getDisplayName')) {
+            $displayName = app($model)->getDisplayName();
+            $message = "没有找到相关的{$displayName}数据";
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'code'    => 404,
+                'errors'  => [],
+                'model'   => class_basename($model),
+                'message' => $message
+            ], 404);
+        }
+
+        return new HttpException(404, $message, $exception);
     }
 }

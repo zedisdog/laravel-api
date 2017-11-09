@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
 class BaseEntity extends Model
 {
 
+    public $displayName = __CLASS__;
+
     /**
      * @return Builder
      */
