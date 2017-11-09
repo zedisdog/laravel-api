@@ -8,7 +8,6 @@
 
 namespace CaoJiayuan\LaravelApi\Foundation\Exceptions\Traits;
 
-use CaoJiayuan\LaravelApi\Database\Eloquent\BaseEntity;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -41,7 +40,7 @@ trait ExceptionRenderer
         $methodName = 'handle' . $baseName;
         if (method_exists($this, $methodName)) {
             $response = call_user_func_array([$this, $methodName], [$exception, $request]);
-            if ($response instanceof Response){
+            if ($response instanceof Response) {
                 return $response;
             }
             if ($response instanceof Exception) {
@@ -133,7 +132,9 @@ trait ExceptionRenderer
 
         if (method_exists($model, 'getDisplayName')) {
             $displayName = app($model)->getDisplayName();
-            $message = "没有找到相关的{$displayName}数据";
+            $message = __('errors.modelNotFound', [
+                'model' => $displayName
+            ]);
         }
 
         if ($request->expectsJson()) {

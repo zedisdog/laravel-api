@@ -36,4 +36,12 @@ class BaseEntity extends Model
     {
 
     }
+
+    /**
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->displayName;
+    }
 }
