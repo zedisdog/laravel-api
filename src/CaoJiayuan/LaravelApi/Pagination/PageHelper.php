@@ -10,11 +10,12 @@ namespace CaoJiayuan\LaravelApi\Pagination;
 
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 trait PageHelper
 {
     /**
-     * @param Builder $builder
+     * @param Builder|Model $builder
      * @param int $perPage
      * @param array $columns
      * @param string $pageName
