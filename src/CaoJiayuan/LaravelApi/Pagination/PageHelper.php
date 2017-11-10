@@ -26,7 +26,8 @@ trait PageHelper
         $url = url()->current();
         $query = \Request::query();
         $query = http_build_query(array_except($query, $pageName));
-        $path = $url . '?' . $query;
+        $query && $query = '?' . $query;
+        $path = $url . $query;
         return $builder->paginate($perPage)->setPath($path);
     }
 
