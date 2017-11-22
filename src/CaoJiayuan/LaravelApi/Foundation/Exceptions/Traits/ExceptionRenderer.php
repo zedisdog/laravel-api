@@ -61,6 +61,7 @@ trait ExceptionRenderer
                 $file = $exception->getFile();
                 $file = str_replace(base_path() . DIRECTORY_SEPARATOR, '', $file);
                 $line = $exception->getLine();
+                $data['exception'] = class_basename($exception);
                 $data['file'] = "$file. Line:[$line]";
                 $data['trace'] = $this->parseTrace($exception);
             }
