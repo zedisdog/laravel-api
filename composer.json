@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "barryvdh/laravel-ide-helper": "^2.4",
-        "doctrine/dbal": "^2.5.0",
+        "doctrine/dbal": "~2.5.0",
         "mnabialek/laravel-sql-logger": "^1.1",
         "tymon/jwt-auth": "^1.0.0"
     },
